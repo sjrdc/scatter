@@ -74,7 +74,7 @@ int main(int argc, char** argv)
   int ny = ymax - ymin + 1;
   int n = std::max(nx, ny);
   
-  CImg<unsigned char> img(n, n, 1, 1, 128);
+  CImg<unsigned char> img(n, n, 1, 1, 0);
   for (Point2D p : data)
     {
       int y = n - 1 - (p.y - ymin);
