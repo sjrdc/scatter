@@ -27,6 +27,14 @@ Plot::Plot(QWidget *parent) :
   // zoom in/out with the wheel
   QwtPlotMagnifier *magnifier = new QwtPlotMagnifier(canvas());
   magnifier->setMouseButton(Qt::NoButton);
+
+  // grid
+  QwtPlotGrid *grid = new QwtPlotGrid;
+  grid->enableXMin(true);
+  grid->enableYMin(true);
+  grid->setMajPen(QPen(Qt::gray, 0, Qt::DotLine));
+  grid->setMinPen(QPen(Qt::gray, 0, Qt::DotLine));
+  grid->attach(this);
 }
 
 void Plot::setSymbol(QwtSymbol *symbol)
