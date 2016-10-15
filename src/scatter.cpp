@@ -70,21 +70,26 @@ int main(int argc, char** argv)
 
   data.getBounds(xmin, xmax, ymin, ymax);
 
+  int gridx = 5;
+  int gridy = 5;
   int nx = xmax - xmin + 1;
   int ny = ymax - ymin + 1;
-  int n = std::max(nx, ny);
+  int n = std::max(nx*gridx, ny*gridy);
   
   CImg<unsigned char> img(n, n, 1, 1, 0);
   for (Point2D p : data)
     {
-      int y = n - 1 - (p.y - ymin);
-      int x = p.x - xmin;
+      int y = n - 1 - (p.y - ymin)*gridy;
+      int x = (p.x - xmin)*gridx;
 
-      std::cout << x << " " << y << std::endl;
+      std::cout << x << " " << y << ";\t";
+      std::cout << x*gridx << " " << y*gridy << std::endl;
+      
       img(x, y) = 255;
     }
 
   img.resize(512, 512);
   img.save(outfile.c_str());
+
   return 0;
 }
