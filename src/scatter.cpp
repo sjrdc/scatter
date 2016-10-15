@@ -11,14 +11,12 @@ using namespace cimg_library;
 
 int main(int argc, char** argv)
 {
-  // Wrap everything in a try block.  Do this every time, 
-  // because exceptions will be thrown for problems.
   std::string infile;
   std::string outfile;
   bool display;
   try
     {  
-      TCLAP::CmdLine cmdline("scatter", ' ', "0.1");
+      TCLAP::CmdLine cmdline("scatter", ' ', "1.0");
 
       TCLAP::ValueArg<std::string> infileArg("i","infile",
 					     "Input file containing coordinates",
