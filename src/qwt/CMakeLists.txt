@@ -20,8 +20,8 @@ include_directories(${QWT_INCLUDE_DIRS})
 
 add_executable(scatterplot
   main.cpp
-  mainwindow.cpp
-  plot.cpp
+  MainWindow.cpp
+  Plot.cpp
   )
 
 target_link_libraries(scatterplot Qt4::QtGui ${QWT_LIBRARY})

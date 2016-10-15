@@ -1,6 +1,7 @@
 
+#include "MainWindow.h"
+
 #include <qapplication.h>
-#include "mainwindow.h"
 #include <iostream>
 #include <fstream>
 

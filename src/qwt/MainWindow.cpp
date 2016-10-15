@@ -1,5 +1,5 @@
-#include "mainwindow.h"
-#include "plot.h"
+#include "MainWindow.h"
+#include "Plot.h"
 
 #include <qmath.h>
 

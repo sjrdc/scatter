@@ -1,5 +1,5 @@
 #include <iostream>
-#include "plot.h"
+#include "Plot.h"
 #include <qwt_plot_grid.h>
 #include <qwt_plot_magnifier.h>
 #include <qwt_plot_panner.h>
