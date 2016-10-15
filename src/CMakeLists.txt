@@ -9,15 +9,5 @@ else()
   message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
-
-
-add_executable(scatter
-  scatter.cpp
-  Point2D.cpp
-  DataArray.cpp)
-
-if (UNIX)
-  target_link_libraries(scatter pthread X11)
-endif()
-
-# target_compile_features(scatter PRIVATE cxx_range_for)
+add_subdirectory(cimg)
+add_subdirectory(qwt)
