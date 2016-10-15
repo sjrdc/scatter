@@ -12,7 +12,7 @@ Plot::Plot(QWidget *parent) :
   d_curve(NULL)
 {
   // attach curve
-  d_curve = new QwtPlotCurve("Scattered Points");
+  d_curve = new QwtPlotCurve();
   QPen pen(QColor("Red"));
   pen.setWidth(5);
   d_curve->setPen(pen);

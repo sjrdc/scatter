@@ -7,15 +7,15 @@ class Plot;
 
 class MainWindow: public QMainWindow
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    MainWindow();
+  MainWindow(QString title);
 
-	void setSamples( const QPolygonF& samples );
+  void setSamples( const QPolygonF& samples );
 
 private:
-    Plot *d_plot;
+  Plot *d_plot;
 };
 
 #endif

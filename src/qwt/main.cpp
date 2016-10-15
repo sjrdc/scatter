@@ -48,7 +48,7 @@ int main( int argc, char **argv )
   
   QApplication a( argc, argv );
 
-  MainWindow w;
+  MainWindow w(QString::fromStdString(infile));
   w.resize(800, 800);
   
   // start reading input file

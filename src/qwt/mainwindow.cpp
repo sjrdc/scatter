@@ -3,10 +3,10 @@
 
 #include <qmath.h>
 
-MainWindow::MainWindow()
+MainWindow::MainWindow(QString title)
 {
   d_plot = new Plot(this);
-  d_plot->setTitle("Scatter Plot");
+  d_plot->setTitle(title);
   setCentralWidget(d_plot);
 }
 
