@@ -70,25 +70,38 @@ int main(int argc, char** argv)
 
   data.getBounds(xmin, xmax, ymin, ymax);
 
-  int gridx = 5;
-  int gridy = 5;
+  short gridx = 12;
+  short gridy = 12;
   int nx = xmax - xmin + 1;
   int ny = ymax - ymin + 1;
   int n = std::max(nx*gridx, ny*gridy);
   
   CImg<unsigned char> img(n, n, 1, 1, 0);
+
+  bool drawgrid = true;
+  if (drawgrid)
+    {
+      CImg<int> gx(n, 1, 1, 1, 0);
+      CImg<int> gy(n, 1, 1, 1, 0);
+      for (int i = 0; i < n; ++ i)
+	{
+	  gx(i) = i*gridx;
+	  gy(i) = i*gridy;
+	}
+      const unsigned char gc = 128;
+      img.draw_grid(gx, gy, &gc, 0.8, 0xCCCCCCCC, 0xCCCCCCCC);
+    }
+  
+  const unsigned char cc = 255;
+
   for (Point2D p : data)
     {
       int y = n - 1 - (p.y - ymin)*gridy;
       int x = (p.x - xmin)*gridx;
-
-      std::cout << x << " " << y << ";\t";
-      std::cout << x*gridx << " " << y*gridy << std::endl;
-      
-      img(x, y) = 255;
+      img.draw_circle(x, y, float(gridx)/4, &cc, 1);
     }
 
-  img.resize(512, 512);
+  img.resize(1024, 1024, 1, 1, 3);
   img.save(outfile.c_str());
 
   return 0;
