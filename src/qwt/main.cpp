@@ -8,12 +8,6 @@
 #include <CImg.h>
 #include <tclap/CmdLine.h>
 
-static double randomValue()
-{
-    // a number between [ 0.0, 1.0 ]
-	return ( qrand() % 100000 ) / 100000.0;
-}
-
 int main( int argc, char **argv )
 {
   std::string infile;
@@ -21,7 +15,7 @@ int main( int argc, char **argv )
   bool display;
   try
     {  
-      TCLAP::CmdLine cmdline("scatter", ' ', "1.0");
+      TCLAP::CmdLine cmdline("scatterplot", ' ', "0.5");
 
       TCLAP::ValueArg<std::string> infileArg("i","infile",
 					     "Input file containing coordinates",
