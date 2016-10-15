@@ -13,10 +13,8 @@ Plot::Plot(QWidget *parent) :
 {
   // attach curve
   d_curve = new QwtPlotCurve();
-  QPen pen(QColor("Red"));
-  pen.setWidth(5);
+  QPen pen(Qt::red, 5);
   d_curve->setPen(pen);
-
   d_curve->attach(this);
 
   setSymbol(NULL);
