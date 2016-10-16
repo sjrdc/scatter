@@ -5,41 +5,13 @@
 #include <iostream>
 #include <fstream>
 
-#include <CImg.h>
-#include <tclap/CmdLine.h>
-
 int main( int argc, char **argv )
 {
   std::string infile;
   std::string outfile;
-  bool display;
-  try
-    {  
-      TCLAP::CmdLine cmdline("scatterplot", ' ', "0.5");
 
-      TCLAP::ValueArg<std::string> infileArg("i","infile",
-					     "Input file containing coordinates",
-					     true, "", "datafile.ext", cmdline);
-      TCLAP::ValueArg<std::string> outfileArg("o","outfile",
-					      "Output file",
-					      true, "", "image.ext", cmdline);
-
-      TCLAP::SwitchArg displayArg("d","display",
-				  "Display the image", cmdline, false);
-
-      // Parse the argv array.
-      cmdline.parse( argc, argv );
-
-      // Get the value parsed by each arg. 
-      infile = infileArg.getValue();
-      outfile = outfileArg.getValue();
-      display = displayArg.getValue();
-    }
-  catch (TCLAP::ArgException &e)  // catch any exceptions
-    {
-      std::cerr << "error: " << e.error()
-		<< " for arg " << e.argId() << std::endl;
-    }
+  if (argc > 1)
+    infile = std::string(argv[1]);
   
   QApplication a( argc, argv );
 
