@@ -4,6 +4,7 @@
 #include <qmainwindow.h>
 
 class Plot;
+class QwtPlotRescaler;
 
 class MainWindow: public QMainWindow
 {
@@ -12,9 +13,13 @@ class MainWindow: public QMainWindow
 public:
   MainWindow(QString title);
 
-  void setSamples( const QPolygonF& samples );
 
 private:
+    void initRescaler();
+    void readPoints(QString infile);
+    void setSamples( const QPolygonF& samples );
+
+    QwtPlotRescaler *d_rescaler;
   Plot *d_plot;
 };
 
