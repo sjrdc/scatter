@@ -12,14 +12,14 @@
 
 MainWindow::MainWindow(QString infile)
 {
-    d_plot = new Plot(this);
-    d_plot->replot();
+    plot = new Plot(this);
+    plot->replot();
 
     infile_ = infile;
     readPoints();
 
     initRescaler();
-    setCentralWidget(d_plot);
+    setCentralWidget(plot);
 }
 
 void MainWindow::readPoints()
@@ -48,26 +48,26 @@ void MainWindow::readPoints()
 void MainWindow::initRescaler()
 {
 
-    d_rescaler = new QwtPlotRescaler(d_plot->canvas());
-    d_rescaler->setReferenceAxis( QwtPlot::xBottom );
-    d_rescaler->setAspectRatio( QwtPlot::yLeft, 1.0 );
+    rescaler = new QwtPlotRescaler(plot->canvas());
+    rescaler->setReferenceAxis( QwtPlot::xBottom );
+    rescaler->setAspectRatio( QwtPlot::yLeft, 1.0 );
 
     for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
-        d_rescaler->setIntervalHint( axis, QwtInterval( -10, 10 ) );
+        rescaler->setIntervalHint( axis, QwtInterval( -10, 10 ) );
 
     QwtPlotRescaler::ExpandingDirection direction = QwtPlotRescaler::ExpandUp;
-    d_rescaler->setRescalePolicy( QwtPlotRescaler::Expanding );
+    rescaler->setRescalePolicy( QwtPlotRescaler::Expanding );
 
-    d_rescaler->setEnabled( true );
+    rescaler->setEnabled( true );
     for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
-        d_rescaler->setExpandingDirection( direction );
+        rescaler->setExpandingDirection( direction );
 
-    d_rescaler->rescale();
+    rescaler->rescale();
 }
 
 void MainWindow::setSamples(const QPolygonF &samples)
 {
-    d_plot->setSamples(samples);
+    plot->setSamples(samples);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -78,7 +78,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
       std::cout << "re-read" << std::endl;
     readPoints();
 
-    d_plot->replot();
-    d_rescaler->rescale();
+    plot->replot();
+    rescaler->rescale();
   }
 }

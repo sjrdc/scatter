@@ -22,8 +22,8 @@ private:
     void setSamples( const QPolygonF& samples );
 
     QString infile_;
-    QwtPlotRescaler *d_rescaler;
-  Plot *d_plot;
+    QwtPlotRescaler *rescaler;
+    Plot *plot;
 };
 
 #endif
