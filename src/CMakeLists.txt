@@ -9,5 +9,4 @@ else()
   message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
-# add_subdirectory(cimg)
 add_subdirectory(qwt)
