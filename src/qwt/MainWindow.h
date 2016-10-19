@@ -13,12 +13,15 @@ class MainWindow: public QMainWindow
 public:
   MainWindow(QString title);
 
+protected:
+  void keyPressEvent(QKeyEvent *event);
 
 private:
     void initRescaler();
-    void readPoints(QString infile);
+    void readPoints();
     void setSamples( const QPolygonF& samples );
 
+    QString infile_;
     QwtPlotRescaler *d_rescaler;
   Plot *d_plot;
 };

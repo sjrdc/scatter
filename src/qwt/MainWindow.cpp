@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iostream>
 
+#include <QKeyEvent>
 #include <qmath.h>
 
 MainWindow::MainWindow(QString infile)
@@ -14,22 +15,22 @@ MainWindow::MainWindow(QString infile)
     d_plot = new Plot(this);
     d_plot->replot();
 
-    readPoints(infile);
+    infile_ = infile;
+    readPoints();
 
-    d_plot->setAxisScale(0, -100, 100, 20);
     initRescaler();
     setCentralWidget(d_plot);
 }
 
-void MainWindow::readPoints(QString infile)
+void MainWindow::readPoints()
 {
     // start reading input file
     std::ifstream inputstream;
-    inputstream.open(infile.toStdString().c_str());
+    inputstream.open(infile_.toStdString().c_str());
     if (!inputstream.is_open())
     {
         std::cerr << "error - could not open file "
-                  << infile.toStdString() << "\n";
+                  << infile_.toStdString() << "\n";
     }
 
     // read points from file
@@ -67,4 +68,17 @@ void MainWindow::initRescaler()
 void MainWindow::setSamples(const QPolygonF &samples)
 {
     d_plot->setSamples(samples);
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+  if (event->key() == Qt::Key_F5 ||
+          event->key() == Qt::Key_R)
+  {
+      std::cout << "re-read" << std::endl;
+    readPoints();
+
+    d_plot->replot();
+    d_rescaler->rescale();
+  }
 }
