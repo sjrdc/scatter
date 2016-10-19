@@ -1,5 +1,5 @@
-#include <iostream>
 #include "Plot.h"
+
 #include <qwt_plot_grid.h>
 #include <qwt_plot_magnifier.h>
 #include <qwt_plot_panner.h>
@@ -9,13 +9,13 @@
 
 Plot::Plot(QWidget *parent) :
   QwtPlot(parent),
-  d_curve(NULL)
+  curve(NULL)
 {
   // attach curve
-  d_curve = new QwtPlotCurve();
+  curve = new QwtPlotCurve();
   QPen pen(Qt::red, 3);
-  d_curve->setPen(pen);
-  d_curve->attach(this);
+  curve->setPen(pen);
+  curve->attach(this);
 
   setSymbol(NULL);
 
@@ -43,15 +43,15 @@ Plot::Plot(QWidget *parent) :
 
 void Plot::setSymbol(QwtSymbol *symbol)
 {
-  d_curve->setSymbol(symbol);
+  curve->setSymbol(symbol);
 
   if (symbol == NULL)
     {
-      d_curve->setStyle(QwtPlotCurve::Dots);
+      curve->setStyle(QwtPlotCurve::Dots);
     }
 }
 
 void Plot::setSamples(const QVector<QPointF> &samples)
 {
-  d_curve->setSamples(samples);
+  curve->setSamples(samples);
 }

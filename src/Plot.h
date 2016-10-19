@@ -1,5 +1,4 @@
-#ifndef _PLOT_H_
-#define _PLOT_H_ 1
+#pragma once
 
 #include <qwt_plot.h>
 
@@ -17,7 +16,5 @@ public:
 	void setSamples( const QVector<QPointF> &samples );
 
 private:
-    QwtPlotCurve *d_curve;
+    QwtPlotCurve *curve;
 };
-
-#endif // _PLOT_H_
