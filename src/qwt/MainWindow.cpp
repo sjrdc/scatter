@@ -43,11 +43,11 @@ void MainWindow::readPoints()
         samples += QPointF(x, y);
     }
     setSamples(samples);
+    setAxes(samples);
 }
 
 void MainWindow::initRescaler()
 {
-
     rescaler = new QwtPlotRescaler(plot->canvas());
     rescaler->setReferenceAxis( QwtPlot::xBottom );
     rescaler->setAspectRatio( QwtPlot::yLeft, 1.0 );
@@ -75,10 +75,21 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
   if (event->key() == Qt::Key_F5 ||
           event->key() == Qt::Key_R)
   {
-      std::cout << "re-read" << std::endl;
     readPoints();
-
     plot->replot();
     rescaler->rescale();
   }
+}
+
+void MainWindow::setAxes(const QPolygonF &samples)
+{
+    QRectF rect = samples.boundingRect();
+    qreal x = rect.right();
+    qreal y = rect.top();
+    qreal d = 1.1 * std::max(std::fabs(x), std::fabs(y));
+
+    plot->setAxisScale(QwtPlot::xBottom, -d, d, 16);
+    plot->setAxisScale(QwtPlot::yLeft, -d, d, 16);
+
+    plot->replot();
 }

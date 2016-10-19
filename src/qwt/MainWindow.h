@@ -20,6 +20,7 @@ private:
     void initRescaler();
     void readPoints();
     void setSamples( const QPolygonF& samples );
+    void setAxes(const QPolygonF &samples);
 
     QString infile_;
     QwtPlotRescaler *rescaler;
