@@ -13,7 +13,7 @@ Plot::Plot(QWidget *parent) :
 {
   // attach curve
   d_curve = new QwtPlotCurve();
-  QPen pen(Qt::red, 5);
+  QPen pen(Qt::red, 3);
   d_curve->setPen(pen);
   d_curve->attach(this);
 
@@ -30,8 +30,14 @@ Plot::Plot(QWidget *parent) :
   QwtPlotGrid *grid = new QwtPlotGrid;
   grid->enableXMin(true);
   grid->enableYMin(true);
+
+#ifndef WIN32
   grid->setMajPen(QPen(Qt::gray, 0, Qt::DotLine));
   grid->setMinPen(QPen(Qt::gray, 0, Qt::DotLine));
+#else
+  grid->setMajorPen(QPen(Qt::gray, 0, Qt::DotLine));
+  grid->setMinorPen(QPen(Qt::gray, 0, Qt::DotLine));
+#endif
   grid->attach(this);
 }
 
