@@ -12,7 +12,8 @@ set(CMAKE_AUTOMOC ON)
 if (UNIX)
   # since qwt6-dev relies on qt4
   find_package(Qt4)
-else ()
+elseif (WIN32)
+    find_package(Qt5Widgets)
 endif()
 
 find_package(Qwt REQUIRED)
@@ -24,6 +25,9 @@ add_executable(scatterplot
   Plot.cpp
   )
 
-target_link_libraries(scatterplot Qt4::QtGui ${QWT_LIBRARY})
-
+if (UNIX)
+    target_link_libraries(scatterplot Qt4::QtGui ${QWT_LIBRARY})
+elseif (WIN32)
+    target_link_libraries(scatterplot Qt5::Widgets ${QWT_LIBRARY})
+endif()
 
