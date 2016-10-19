@@ -45,7 +45,7 @@
 
 find_path ( QWT_INCLUDE_DIR
   NAMES qwt_plot.h
-  HINTS ${QT_INCLUDE_DIR} ${QT_INCLUDE_DIR}/../qwt
+  HINTS ${QT_INCLUDE_DIR} ${QT_INCLUDE_DIR}/../qwt ${CMAKE_SOURCE_DIR}/../qwt-6.1.3/src
   PATH_SUFFIXES qwt qwt-qt3 qwt-qt4 qwt-qt5
 )
 
@@ -81,7 +81,7 @@ endif ()
 
 find_library ( QWT_LIBRARY
   NAMES qwt qwt-qt3 qwt-qt4 qwt-qt5
-  HINTS ${QT_LIBRARY_DIR}
+  HINTS ${QT_LIBRARY_DIR} ${QWT_INCLUDE_DIR}/../../build-qwt-Desktop_Qt_5_7_0_MinGW_32bit-Release/lib
 )
 
 set ( QWT_LIBRARIES ${QWT_LIBRARY} )
