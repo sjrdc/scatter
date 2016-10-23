@@ -1,5 +1,6 @@
 #include "Plot.h"
 
+#include <qwt_color_map.h>
 #include <qwt_plot_grid.h>
 #include <qwt_plot_magnifier.h>
 #include <qwt_plot_panner.h>
@@ -14,10 +15,10 @@ Plot::Plot(QWidget *parent) :
   // attach curve
   curve = new QwtPlotSpectroCurve();
   curve->setPenWidth(3);
-  // QPen pen(Qt::red, 3);
-  // curve->setPen(pen);
   curve->attach(this);
 
+  colormap = new QwtLinearColorMap(Qt::red, Qt::red);
+  curve->setColorMap(colormap);
   setSymbol(NULL);
 
   // panning with the left mouse button

@@ -2,8 +2,10 @@
 
 #include <qwt_plot.h>
 #include <qwt_plot_spectrocurve.h>
+
 class QwtPlotCurve;
 class QwtSymbol;
+class QwtColorMap;
 
 class Plot : public QwtPlot
 {
@@ -17,4 +19,5 @@ public:
 
 private:
   QwtPlotSpectroCurve *curve;
+  QwtColorMap *colormap;
 };
