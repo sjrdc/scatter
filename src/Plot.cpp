@@ -17,8 +17,12 @@ Plot::Plot(QWidget *parent) :
   curve->setPenWidth(3);
   curve->attach(this);
 
-  colormap = new QwtLinearColorMap(Qt::green, Qt::red);
+#ifndef WIN32
+  colormap = new QwtLinearColorMap(Qt::yellow, Qt::red);
   curve->setColorMap(colormap);
+#else
+#endif
+
   setSymbol(NULL);
 
   // panning with the left mouse button
