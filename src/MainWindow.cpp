@@ -2,13 +2,16 @@
 #include "Plot.h"
 
 #include <qwt_plot_rescaler.h>
-
 #include <qwt_scale_div.h>
-#include <fstream>
-#include <iostream>
 
 #include <QKeyEvent>
 #include <qmath.h>
+
+#include <fstream>
+#include <iostream>
+#ifndef WIN32
+#include <cmath>
+#endif
 
 MainWindow::MainWindow(QString infile)
 {
