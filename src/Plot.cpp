@@ -13,6 +13,7 @@ Plot::Plot(QWidget *parent) :
 {
   // attach curve
   curve = new QwtPlotSpectroCurve();
+  curve->setPenWidth(3);
   // QPen pen(Qt::red, 3);
   // curve->setPen(pen);
   curve->attach(this);
