@@ -17,7 +17,7 @@ Plot::Plot(QWidget *parent) :
   curve->setPenWidth(3);
   curve->attach(this);
 
-  colormap = new QwtLinearColorMap(Qt::red, Qt::red);
+  colormap = new QwtLinearColorMap(Qt::green, Qt::red);
   curve->setColorMap(colormap);
   setSymbol(NULL);
 
@@ -55,5 +55,16 @@ void Plot::setSymbol(QwtSymbol *symbol)
 
 void Plot::setSamples(const QwtPoint3DSeriesData &samples)
 {
-  curve->setSamples(samples.samples());
+  const QVector<QwtPoint3D> s = samples.samples();
+  curve->setSamples(s);
+  float mx = s.first().z();
+  float mi = mx;
+  for (QVector<QwtPoint3D>::const_iterator p = s.begin();
+       p != s.end(); ++p)
+    {
+      float z = p->z();
+      if (z > mx) mx = z;
+      else if (z < mi) mi = z;
+    }
+  curve->setColorRange(QwtInterval(0, mx));
 }
