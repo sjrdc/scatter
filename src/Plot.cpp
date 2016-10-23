@@ -12,9 +12,9 @@ Plot::Plot(QWidget *parent) :
   curve(NULL)
 {
   // attach curve
-  curve = new QwtPlotCurve();
-  QPen pen(Qt::red, 3);
-  curve->setPen(pen);
+  curve = new QwtPlotSpectroCurve();
+  // QPen pen(Qt::red, 3);
+  // curve->setPen(pen);
   curve->attach(this);
 
   setSymbol(NULL);
@@ -43,15 +43,15 @@ Plot::Plot(QWidget *parent) :
 
 void Plot::setSymbol(QwtSymbol *symbol)
 {
-  curve->setSymbol(symbol);
+  // curve->setSymbol(symbol);
 
-  if (symbol == NULL)
-    {
-      curve->setStyle(QwtPlotCurve::Dots);
-    }
+  // if (symbol == NULL)
+  //   {
+  //     curve->setStyle(QwtPlotCurve::Dots);
+  //   }
 }
 
-void Plot::setSamples(const QVector<QPointF> &samples)
+void Plot::setSamples(const QwtPoint3DSeriesData &samples)
 {
-  curve->setSamples(samples);
+  curve->setSamples(samples.samples());
 }
