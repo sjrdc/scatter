@@ -1,5 +1,6 @@
 #include "Plot.h"
 
+#include <qwt_color_map.h>
 #include <qwt_plot_grid.h>
 #include <qwt_plot_magnifier.h>
 #include <qwt_plot_panner.h>
@@ -12,10 +13,13 @@ Plot::Plot(QWidget *parent) :
   curve(NULL)
 {
   // attach curve
-  curve = new QwtPlotCurve();
-  QPen pen(Qt::red, 3);
-  curve->setPen(pen);
+  curve = new QwtPlotSpectroCurve();
+  curve->setPenWidth(5);
   curve->attach(this);
+
+  colormap = new QwtHueColorMap();
+  // ((QwtHueColorMap*)colormap)->setHueInterval(0, 360);
+  curve->setColorMap(colormap);
 
   setSymbol(NULL);
 
@@ -31,27 +35,23 @@ Plot::Plot(QWidget *parent) :
   grid->enableXMin(true);
   grid->enableYMin(true);
 
-#ifndef WIN32
-  grid->setMajPen(QPen(Qt::gray, 0, Qt::DotLine));
-  grid->setMinPen(QPen(Qt::gray, 0, Qt::DotLine));
-#else
   grid->setMajorPen(QPen(Qt::gray, 0, Qt::DotLine));
   grid->setMinorPen(QPen(Qt::gray, 0, Qt::DotLine));
-#endif
+
   grid->attach(this);
 }
 
 void Plot::setSymbol(QwtSymbol *symbol)
 {
-  curve->setSymbol(symbol);
+  // curve->setSymbol(symbol);
 
-  if (symbol == NULL)
-    {
-      curve->setStyle(QwtPlotCurve::Dots);
-    }
+  // if (symbol == NULL)
+  //   {
+  //     curve->setStyle(QwtPlotCurve::Dots);
+  //   }
 }
 
-void Plot::setSamples(const QVector<QPointF> &samples)
+void Plot::setSamples(const QwtPoint3DSeriesData &samples)
 {
-  curve->setSamples(samples);
+  curve->setSamples(samples.samples());
 }

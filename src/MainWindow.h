@@ -2,7 +2,7 @@
 #define _MAINWINDOW_H_ 1
 
 #include <qmainwindow.h>
-
+#include <qwt_series_data.h>
 class Plot;
 class QwtPlotRescaler;
 
@@ -19,8 +19,8 @@ protected:
 private:
     void initRescaler();
     void readPoints();
-    void setSamples( const QPolygonF& samples );
-    void setAxes(const QPolygonF &samples);
+    void setSamples( const QwtPoint3DSeriesData &samples );
+    void setAxes(const QwtPoint3DSeriesData &samples);
 
     QString infile_;
     QwtPlotRescaler *rescaler;

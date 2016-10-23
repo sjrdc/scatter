@@ -1,9 +1,11 @@
 #pragma once
 
 #include <qwt_plot.h>
+#include <qwt_plot_spectrocurve.h>
 
 class QwtPlotCurve;
 class QwtSymbol;
+class QwtColorMap;
 
 class Plot : public QwtPlot
 {
@@ -12,9 +14,10 @@ class Plot : public QwtPlot
 public:
     Plot( QWidget *parent = NULL );
 
-	void setSymbol( QwtSymbol * );
-	void setSamples( const QVector<QPointF> &samples );
+  void setSymbol(QwtSymbol *);
+  void setSamples(const QwtPoint3DSeriesData &samples);
 
 private:
-    QwtPlotCurve *curve;
+  QwtPlotSpectroCurve *curve;
+  QwtColorMap *colormap;
 };

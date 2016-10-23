@@ -40,12 +40,12 @@ void MainWindow::readPoints()
     float x, y;
     char dummy;
     int counter;
-    QPolygonF samples;
+    QVector<QwtPoint3D> samples;
     while (inputstream >> counter >> dummy >> x >> dummy >> y)
     {
-        samples += QPointF(x, y);
+      samples.push_back(QwtPoint3D(x, y, counter));
     }
-    setSamples(samples);
+    setSamples(QwtPoint3DSeriesData(samples));
     setAxes(samples);
 }
 
@@ -68,7 +68,7 @@ void MainWindow::initRescaler()
     rescaler->rescale();
 }
 
-void MainWindow::setSamples(const QPolygonF &samples)
+void MainWindow::setSamples(const QwtPoint3DSeriesData &samples)
 {
     plot->setSamples(samples);
 }
@@ -84,7 +84,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
   }
 }
 
-void MainWindow::setAxes(const QPolygonF &samples)
+void MainWindow::setAxes(const QwtPoint3DSeriesData &samples)
 {
     QRectF rect = samples.boundingRect();
     qreal x = rect.right();
