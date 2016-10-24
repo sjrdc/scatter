@@ -45,7 +45,7 @@
 
 find_path ( QWT_INCLUDE_DIR
   NAMES qwt_plot.h
-  HINTS ${QT_INCLUDE_DIR} ${QT_INCLUDE_DIR}/../qwt ${CMAKE_SOURCE_DIR}/../qwt-6.1.3/src
+  HINTS ${QT_INCLUDE_DIR} ${QT_INCLUDE_DIR}/../qwt ${CMAKE_SOURCE_DIR}/../qwt/qwt/src
   PATH_SUFFIXES qwt qwt-qt3 qwt-qt4 qwt-qt5
 )
 
