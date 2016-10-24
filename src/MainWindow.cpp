@@ -75,13 +75,25 @@ void MainWindow::setSamples(const QwtPoint3DSeriesData &samples)
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-  if (event->key() == Qt::Key_F5 ||
-          event->key() == Qt::Key_R)
-  {
-    readPoints();
-    plot->replot();
-    rescaler->rescale();
-  }
+    switch (event->key())
+    {
+    case Qt::Key_F5:
+    case Qt::Key_R:
+      {
+        readPoints();
+        plot->replot();
+        rescaler->rescale();
+        break;
+      }
+    case Qt::Key_C:
+    {
+        plot->toggleColorMap();
+        plot->replot();
+        break;
+    }
+    default:
+        break;
+    }
 }
 
 void MainWindow::setAxes(const QwtPoint3DSeriesData &samples)

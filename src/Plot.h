@@ -16,8 +16,12 @@ public:
 
   void setSymbol(QwtSymbol *);
   void setSamples(const QwtPoint3DSeriesData &samples);
+    void toggleColorMap();
 
 private:
+    void initColorMaps();
+
   QwtPlotSpectroCurve *curve;
-  QwtColorMap *colormap;
+  QwtColorMap *colorMap;
+  bool activeColorMap;
 };

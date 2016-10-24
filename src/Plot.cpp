@@ -17,10 +17,7 @@ Plot::Plot(QWidget *parent) :
   curve->setPenWidth(5);
   curve->attach(this);
 
-  colormap = new QwtHueColorMap();
-  // ((QwtHueColorMap*)colormap)->setHueInterval(0, 360);
-  curve->setColorMap(colormap);
-
+  initColorMaps();
   setSymbol(NULL);
 
   // panning with the left mouse button
@@ -41,6 +38,12 @@ Plot::Plot(QWidget *parent) :
   grid->attach(this);
 }
 
+void Plot::initColorMaps()
+{
+    activeColorMap = true;
+    toggleColorMap();
+}
+
 void Plot::setSymbol(QwtSymbol *symbol)
 {
   // curve->setSymbol(symbol);
@@ -54,4 +57,19 @@ void Plot::setSymbol(QwtSymbol *symbol)
 void Plot::setSamples(const QwtPoint3DSeriesData &samples)
 {
   curve->setSamples(samples.samples());
+}
+
+void Plot::toggleColorMap()
+{
+    if (activeColorMap)
+    {
+        colorMap = new QwtLinearColorMap(Qt::red, Qt::red);
+    }
+    else {
+
+        colorMap = new QwtHueColorMap();
+    }
+    curve->setColorMap(colorMap);
+
+    activeColorMap = !activeColorMap;
 }
