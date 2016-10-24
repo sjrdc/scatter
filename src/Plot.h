@@ -18,9 +18,10 @@ public:
   void setSamples(const QwtPoint3DSeriesData &samples);
     void toggleColorMap();
 
+    void increaseDotSize(int d);
+
 private:
     void initColorMaps();
-
   QwtPlotSpectroCurve *curve;
   QwtColorMap *colorMap;
   bool activeColorMap;

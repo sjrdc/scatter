@@ -91,6 +91,18 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         plot->replot();
         break;
     }
+    case Qt::Key_Plus:
+    {
+        plot->increaseDotSize(1);
+        plot->replot();
+        break;
+    }
+    case Qt::Key_Minus:
+    {
+        plot->increaseDotSize(-1);
+        plot->replot();
+        break;
+    }
     default:
         break;
     }

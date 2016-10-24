@@ -18,6 +18,7 @@ Plot::Plot(QWidget *parent) :
   curve->attach(this);
 
   initColorMaps();
+  setStyleSheet("background: black; color: grey;");
   setSymbol(NULL);
 
   // panning with the left mouse button
@@ -72,4 +73,9 @@ void Plot::toggleColorMap()
     curve->setColorMap(colorMap);
 
     activeColorMap = !activeColorMap;
+}
+
+void Plot::increaseDotSize(int d)
+{
+    curve->setPenWidth(curve->penWidth() + d);
 }
