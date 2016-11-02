@@ -9,20 +9,22 @@ class QwtColorMap;
 
 class Plot : public QwtPlot
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    Plot( QWidget *parent = NULL );
+  Plot(QWidget *parent = NULL);
 
   void setSymbol(QwtSymbol *);
   void setSamples(const QwtPoint3DSeriesData &samples);
-    void toggleColorMap();
-
-    void increaseDotSize(int d);
+  void toggleColorMap();
+  void adaptAxesToSamples();
+  void adaptColormapToSamples();
+  void increaseDotSize(int d);
 
 private:
-    void initColorMaps();
+  void initColorMaps();
   QwtPlotSpectroCurve *curve;
   QwtColorMap *colorMap;
   bool activeColorMap;
+  size_t nSamples;
 };

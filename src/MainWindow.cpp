@@ -46,7 +46,9 @@ void MainWindow::readPoints()
       samples.push_back(QwtPoint3D(x, y, counter));
     }
     setSamples(QwtPoint3DSeriesData(samples));
-    setAxes(samples);
+
+    plot->adaptAxesToSamples();
+    plot->adaptColormapToSamples();
 }
 
 void MainWindow::initRescaler()
@@ -61,7 +63,7 @@ void MainWindow::initRescaler()
     QwtPlotRescaler::ExpandingDirection direction = QwtPlotRescaler::ExpandUp;
     rescaler->setRescalePolicy( QwtPlotRescaler::Expanding );
 
-    rescaler->setEnabled( true );
+    rescaler->setEnabled(true);
     for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
         rescaler->setExpandingDirection( direction );
 

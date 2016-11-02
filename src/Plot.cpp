@@ -49,17 +49,25 @@ void Plot::initColorMaps()
 
 void Plot::setSymbol(QwtSymbol *symbol)
 {
-  // curve->setSymbol(symbol);
+}
 
-  // if (symbol == NULL)
-  //   {
-  //     curve->setStyle(QwtPlotCurve::Dots);
-  //   }
+void Plot::adaptAxesToSamples()
+{
+  QRectF rect = curve->boundingRect();
+  qreal x = rect.right();
+  qreal y = rect.top();
+  qreal d = 1.1 * std::max(std::fabs(x), std::fabs(y));
+
+  this->setAxisScale(QwtPlot::xBottom, -d, d, 16);
+  this->setAxisScale(QwtPlot::yLeft, -d, d, 16);
+
+  this->replot();
 }
 
 void Plot::setSamples(const QwtPoint3DSeriesData &samples)
 {
   curve->setSamples(samples.samples());
+  nSamples = samples.size();
 }
 
 void Plot::toggleColorMap()
@@ -80,4 +88,9 @@ void Plot::toggleColorMap()
 void Plot::increaseDotSize(int d)
 {
     curve->setPenWidth(curve->penWidth() + d);
+}
+
+void Plot::adaptColormapToSamples()
+{
+  curve->setColorRange(QwtInterval(0, nSamples));
 }
