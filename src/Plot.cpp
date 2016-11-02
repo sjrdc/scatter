@@ -8,13 +8,15 @@
 #include <qwt_picker_machine.h>
 #include <qwt_plot_curve.h>
 
+#include <cmath>
+
 Plot::Plot(QWidget *parent) :
   QwtPlot(parent),
   curve(NULL)
 {
   // attach curve
   curve = new QwtPlotSpectroCurve();
-  curve->setPenWidth(5);
+  curve->setPenWidth(3);
   curve->attach(this);
 
   initColorMaps();
