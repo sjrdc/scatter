@@ -68,7 +68,8 @@ void Plot::adaptAxesToSamples()
 void Plot::setSamples(const QwtPoint3DSeriesData &samples)
 {
   curve->setSamples(samples.samples());
-  nSamples = samples.size();
+  curve->setColorRange(QwtInterval(0, samples.size()));
+  adaptAxesToSamples();
 }
 
 void Plot::toggleColorMap()
@@ -93,7 +94,3 @@ void Plot::increaseDotSize(int d)
     curve->setPenWidth(curve->penWidth() + d);
 }
 
-void Plot::adaptColormapToSamples()
-{
-  curve->setColorRange(QwtInterval(0, nSamples));
-}

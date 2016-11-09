@@ -46,9 +46,6 @@ void MainWindow::readPoints()
       samples.push_back(QwtPoint3D(x, y, counter));
     }
     setSamples(QwtPoint3DSeriesData(samples));
-
-    plot->adaptAxesToSamples();
-    plot->adaptColormapToSamples();
 }
 
 void MainWindow::initRescaler()

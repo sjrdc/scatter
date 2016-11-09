@@ -17,14 +17,13 @@ public:
   void setSymbol(QwtSymbol *);
   void setSamples(const QwtPoint3DSeriesData &samples);
   void toggleColorMap();
-  void adaptAxesToSamples();
-  void adaptColormapToSamples();
   void increaseDotSize(int d);
 
 private:
+  void adaptAxesToSamples();
+
   void initColorMaps();
   QwtPlotSpectroCurve *curve;
   QwtColorMap *colorMap;
   bool activeColorMap;
-  size_t nSamples;
 };
