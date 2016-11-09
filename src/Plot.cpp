@@ -20,9 +20,10 @@ Plot::Plot(QWidget *parent) :
   curve->attach(this);
 
   initColorMaps();
-  setStyleSheet("background: black; color: grey;");
   setSymbol(NULL);
-
+  setStyleSheet("background: button; "
+		"color: black;");
+  
   // panning with the left mouse button
   (void) new QwtPlotPanner(canvas());
 
@@ -74,11 +75,13 @@ void Plot::toggleColorMap()
 {
     if (activeColorMap)
     {
-        colorMap = new QwtLinearColorMap(Qt::red, Qt::red);
+        colorMap = new QwtLinearColorMap(Qt::black, Qt::black);
+	setStyleSheet("background: button; color: black;");
     }
     else {
 
         colorMap = new QwtHueColorMap();
+	setStyleSheet("background: black; color: grey;");
     }
     curve->setColorMap(colorMap);
 
