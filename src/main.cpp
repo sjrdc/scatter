@@ -1,5 +1,5 @@
 
-#include "MainWindow.h"
+#include "ScatterWindow.h"
 
 #include <qapplication.h>
 #include <iostream>
@@ -14,7 +14,7 @@ int main( int argc, char **argv )
   
   QApplication a(argc, argv);
 
-  MainWindow w(QString::fromStdString(infile));
+  ScatterWindow w(QString::fromStdString(infile));
   w.resize(800, 800);
   
   w.show();

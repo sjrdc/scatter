@@ -15,7 +15,7 @@ include_directories(${QWT_INCLUDE_DIRS})
 
 add_executable(scatterplot
   main.cpp
-  MainWindow.cpp
+  ScatterWindow.cpp
   Plot.cpp
   )
 

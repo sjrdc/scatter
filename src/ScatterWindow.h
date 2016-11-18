@@ -1,17 +1,17 @@
-#ifndef _MAINWINDOW_H_
-#define _MAINWINDOW_H_ 1
+#pragma once
 
-#include <qmainwindow.h>
+#include <QMainWindow>
+
 #include <qwt_series_data.h>
 class Plot;
 class QwtPlotRescaler;
 
-class MainWindow: public QMainWindow
+class ScatterWindow: public QMainWindow
 {
   Q_OBJECT
 
 public:
-  MainWindow(QString title);
+  ScatterWindow(QString title);
 
 protected:
   void keyPressEvent(QKeyEvent *event);
@@ -26,5 +26,3 @@ private:
     QwtPlotRescaler *rescaler;
     Plot *plot;
 };
-
-#endif

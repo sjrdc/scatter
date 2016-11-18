@@ -1,4 +1,4 @@
-#include "MainWindow.h"
+#include "ScatterWindow.h"
 #include "Plot.h"
 
 #include <qwt_plot_rescaler.h>
@@ -13,7 +13,7 @@
 #include <cmath>
 #endif
 
-MainWindow::MainWindow(QString infile)
+ScatterWindow::ScatterWindow(QString infile)
 {
     plot = new Plot(this);
     plot->replot();
@@ -25,7 +25,7 @@ MainWindow::MainWindow(QString infile)
     setCentralWidget(plot);
 }
 
-void MainWindow::readPoints()
+void ScatterWindow::readPoints()
 {
     // start reading input file
     std::ifstream inputstream;
@@ -48,7 +48,7 @@ void MainWindow::readPoints()
     setSamples(QwtPoint3DSeriesData(samples));
 }
 
-void MainWindow::initRescaler()
+void ScatterWindow::initRescaler()
 {
     rescaler = new QwtPlotRescaler(plot->canvas());
     rescaler->setReferenceAxis( QwtPlot::xBottom );
@@ -67,12 +67,12 @@ void MainWindow::initRescaler()
     rescaler->rescale();
 }
 
-void MainWindow::setSamples(const QwtPoint3DSeriesData &samples)
+void ScatterWindow::setSamples(const QwtPoint3DSeriesData &samples)
 {
     plot->setSamples(samples);
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *event)
+void ScatterWindow::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key())
     {
@@ -107,7 +107,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void MainWindow::setAxes(const QwtPoint3DSeriesData &samples)
+void ScatterWindow::setAxes(const QwtPoint3DSeriesData &samples)
 {
     QRectF rect = samples.boundingRect();
     qreal x = rect.right();
