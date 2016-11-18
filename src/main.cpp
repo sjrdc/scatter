@@ -1,22 +1,22 @@
 
-#include "ScatterWindow.h"
+#include "MainWindow.h"
 
 #include <qapplication.h>
 #include <iostream>
 
 int main( int argc, char **argv )
 {
-  std::string infile;
-  std::string outfile;
+  QString infile;
 
   if (argc > 1)
-    infile = std::string(argv[1]);
+    infile = QString(argv[1]);
   
   QApplication a(argc, argv);
 
-  ScatterWindow w(QString::fromStdString(infile));
+  MainWindow w;
+  w.openFile(infile);
+
   w.resize(800, 800);
-  
   w.show();
 
   return a.exec();

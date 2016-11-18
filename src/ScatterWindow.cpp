@@ -13,16 +13,18 @@
 #include <cmath>
 #endif
 
-ScatterWindow::ScatterWindow(QString infile)
+ScatterWindow::ScatterWindow(QWidget *parent, Qt::WindowFlags flags) :
+    QMainWindow(parent, flags),
+    plot_(new Plot(this))
 {
-    plot = new Plot(this);
-    plot->replot();
+    plot_->replot();
+    setCentralWidget(plot_);
+}
 
+void ScatterWindow::openFile(const QString &infile)
+{
     infile_ = infile;
     readPoints();
-
-    initRescaler();
-    setCentralWidget(plot);
 }
 
 void ScatterWindow::readPoints()
@@ -43,33 +45,33 @@ void ScatterWindow::readPoints()
     QVector<QwtPoint3D> samples;
     while (inputstream >> counter >> dummy >> x >> dummy >> y)
     {
-      samples.push_back(QwtPoint3D(x, y, counter));
+        samples.push_back(QwtPoint3D(x, y, counter));
     }
     setSamples(QwtPoint3DSeriesData(samples));
 }
 
 void ScatterWindow::initRescaler()
 {
-    rescaler = new QwtPlotRescaler(plot->canvas());
-    rescaler->setReferenceAxis( QwtPlot::xBottom );
-    rescaler->setAspectRatio( QwtPlot::yLeft, 1.0 );
+    rescaler_ = new QwtPlotRescaler(plot_->canvas());
+    rescaler_->setReferenceAxis( QwtPlot::xBottom );
+    rescaler_->setAspectRatio( QwtPlot::yLeft, 1.0 );
 
     for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
-        rescaler->setIntervalHint( axis, QwtInterval( -10, 10 ) );
+        rescaler_->setIntervalHint( axis, QwtInterval( -10, 10 ) );
 
     QwtPlotRescaler::ExpandingDirection direction = QwtPlotRescaler::ExpandUp;
-    rescaler->setRescalePolicy( QwtPlotRescaler::Expanding );
+    rescaler_->setRescalePolicy( QwtPlotRescaler::Expanding );
 
-    rescaler->setEnabled(true);
+    rescaler_->setEnabled(true);
     for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
-        rescaler->setExpandingDirection( direction );
+        rescaler_->setExpandingDirection( direction );
 
-    rescaler->rescale();
+    rescaler_->rescale();
 }
 
 void ScatterWindow::setSamples(const QwtPoint3DSeriesData &samples)
 {
-    plot->setSamples(samples);
+    plot_->setSamples(samples);
 }
 
 void ScatterWindow::keyPressEvent(QKeyEvent *event)
@@ -78,28 +80,28 @@ void ScatterWindow::keyPressEvent(QKeyEvent *event)
     {
     case Qt::Key_F5:
     case Qt::Key_R:
-      {
+    {
         readPoints();
-        plot->replot();
-        rescaler->rescale();
+        plot_->replot();
+        rescaler_->rescale();
         break;
-      }
+    }
     case Qt::Key_C:
     {
-        plot->toggleColorMap();
-        plot->replot();
+        plot_->toggleColorMap();
+        plot_->replot();
         break;
     }
     case Qt::Key_Plus:
     {
-        plot->increaseDotSize(1);
-        plot->replot();
+        plot_->increaseDotSize(1);
+        plot_->replot();
         break;
     }
     case Qt::Key_Minus:
     {
-        plot->increaseDotSize(-1);
-        plot->replot();
+        plot_->increaseDotSize(-1);
+        plot_->replot();
         break;
     }
     default:
@@ -114,8 +116,8 @@ void ScatterWindow::setAxes(const QwtPoint3DSeriesData &samples)
     qreal y = rect.top();
     qreal d = 1.1 * std::max(std::fabs(x), std::fabs(y));
 
-    plot->setAxisScale(QwtPlot::xBottom, -d, d, 16);
-    plot->setAxisScale(QwtPlot::yLeft, -d, d, 16);
+    plot_->setAxisScale(QwtPlot::xBottom, -d, d, 16);
+    plot_->setAxisScale(QwtPlot::yLeft, -d, d, 16);
 
-    plot->replot();
+    plot_->replot();
 }
