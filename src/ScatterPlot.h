@@ -7,12 +7,12 @@ class QwtPlotCurve;
 class QwtSymbol;
 class QwtColorMap;
 
-class Plot : public QwtPlot
+class ScatterPlot : public QwtPlot
 {
   Q_OBJECT
 
 public:
-  Plot(QWidget *parent = NULL);
+  ScatterPlot(QWidget *parent = NULL);
 
   void setSymbol(QwtSymbol *);
   void setSamples(const QwtPoint3DSeriesData &samples);

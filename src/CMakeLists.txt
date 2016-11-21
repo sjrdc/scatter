@@ -17,9 +17,11 @@ add_executable(scatterplot
   main.cpp
   MainWindow.cpp
   ScatterWindow.cpp
-  Plot.cpp
+  PSFWindow.cpp
+  ScatterPlot.cpp
+  ImageDisplay.cpp
   )
 
-target_link_libraries(scatterplot Qt5::Widgets ${QWT_LIBRARY})
+target_link_libraries(scatterplot Qt5::Widgets ${QWT_LIBRARY} fftw3f)
 
 

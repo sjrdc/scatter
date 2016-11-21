@@ -1,4 +1,4 @@
-#include "Plot.h"
+#include "ScatterPlot.h"
 
 #include <qwt_color_map.h>
 #include <qwt_plot_grid.h>
@@ -10,7 +10,7 @@
 
 #include <cmath>
 
-Plot::Plot(QWidget *parent) :
+ScatterPlot::ScatterPlot(QWidget *parent) :
   QwtPlot(parent),
   curve(NULL)
 {
@@ -42,17 +42,17 @@ Plot::Plot(QWidget *parent) :
   grid->attach(this);
 }
 
-void Plot::initColorMaps()
+void ScatterPlot::initColorMaps()
 {
     activeColorMap = true;
     toggleColorMap();
 }
 
-void Plot::setSymbol(QwtSymbol *symbol)
+void ScatterPlot::setSymbol(QwtSymbol *symbol)
 {
 }
 
-void Plot::adaptAxesToSamples()
+void ScatterPlot::adaptAxesToSamples()
 {
   QRectF rect = curve->boundingRect();
   qreal x = rect.right();
@@ -65,14 +65,14 @@ void Plot::adaptAxesToSamples()
   this->replot();
 }
 
-void Plot::setSamples(const QwtPoint3DSeriesData &samples)
+void ScatterPlot::setSamples(const QwtPoint3DSeriesData &samples)
 {
   curve->setSamples(samples.samples());
   curve->setColorRange(QwtInterval(0, samples.size()));
   adaptAxesToSamples();
 }
 
-void Plot::toggleColorMap()
+void ScatterPlot::toggleColorMap()
 {
     if (activeColorMap)
     {
@@ -89,7 +89,7 @@ void Plot::toggleColorMap()
     activeColorMap = !activeColorMap;
 }
 
-void Plot::increaseDotSize(int d)
+void ScatterPlot::increaseDotSize(int d)
 {
     curve->setPenWidth(curve->penWidth() + d);
 }
