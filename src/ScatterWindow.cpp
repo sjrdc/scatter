@@ -13,10 +13,11 @@
 #endif
 
 ScatterWindow::ScatterWindow(QWidget *parent, Qt::WindowFlags flags) :
-    QMainWindow(parent, flags),
-    plot_(new ScatterPlot(this))
+  QMainWindow(parent, flags),
+  plot_(new ScatterPlot(this))
 {
-    setCentralWidget(plot_);
+  initRescaler();
+  setCentralWidget(plot_);
 }
 
 void ScatterWindow::initRescaler()
@@ -26,7 +27,7 @@ void ScatterWindow::initRescaler()
     rescaler_->setAspectRatio(QwtPlot::yLeft, 1.0);
 
     for (int axis = 0; axis < QwtPlot::axisCnt; axis++)
-        rescaler_->setIntervalHint( axis, QwtInterval(-10, 10));
+        rescaler_->setIntervalHint(axis, QwtInterval(-10, 10));
 
     QwtPlotRescaler::ExpandingDirection direction = QwtPlotRescaler::ExpandUp;
     rescaler_->setRescalePolicy(QwtPlotRescaler::Expanding);
@@ -38,9 +39,6 @@ void ScatterWindow::initRescaler()
 
 void ScatterWindow::setSamples(const QVector<QwtPoint3D> &samples)
 {
-  if (rescaler_ != NULL) delete rescaler_;
-  initRescaler();
-  plot_->replot();
   plot_->setSamples(QwtPoint3DSeriesData(samples));
   rescaler_->rescale();
 }
