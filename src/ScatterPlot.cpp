@@ -57,18 +57,17 @@ void ScatterPlot::adaptAxesToSamples()
   QRectF rect = curve->boundingRect();
   qreal x = rect.right();
   qreal y = rect.top();
-  qreal d = 1.1 * std::max(std::fabs(x), std::fabs(y));
-
+  qreal d = 1.1* std::max(std::fabs(x), std::fabs(y));
+    
   this->setAxisScale(QwtPlot::xBottom, -d, d, 16);
   this->setAxisScale(QwtPlot::yLeft, -d, d, 16);
-
-  this->replot();
 }
 
 void ScatterPlot::setSamples(const QwtPoint3DSeriesData &samples)
 {
   curve->setSamples(samples.samples());
   curve->setColorRange(QwtInterval(0, samples.size()));
+
   adaptAxesToSamples();
 }
 

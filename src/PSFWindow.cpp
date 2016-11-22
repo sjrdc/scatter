@@ -1,6 +1,8 @@
 #include "PSFWindow.h"
 #include "ImageDisplay.h"
 
+#include <qwt_plot_spectrocurve.h>
+
 #include <complex>
 #include <fftw3.h>
 
@@ -74,7 +76,11 @@ void PSFWindow::setSamples(const QVector<QwtPoint3D> &samples)
 
 int PSFWindow::estimateSize(const QVector<QwtPoint3D> &samples) const
 {
-  return 128;
+  QwtPoint3DSeriesData sd(samples);
+  QRectF r = sd.boundingRect();
+  int x = r.right();
+  int y = r.top();
+  return  2*std::max(x, y);
 }
 
 

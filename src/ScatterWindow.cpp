@@ -29,17 +29,18 @@ void ScatterWindow::initRescaler()
     for (int axis = 0; axis < QwtPlot::axisCnt; axis++)
         rescaler_->setIntervalHint(axis, QwtInterval(-10, 10));
 
-    QwtPlotRescaler::ExpandingDirection direction = QwtPlotRescaler::ExpandUp;
+    QwtPlotRescaler::ExpandingDirection direction = QwtPlotRescaler::ExpandBoth;
     rescaler_->setRescalePolicy(QwtPlotRescaler::Expanding);
-
-    rescaler_->setEnabled(true);
     for ( int axis = 0; axis < QwtPlot::axisCnt; axis++ )
         rescaler_->setExpandingDirection(direction);
+
+    rescaler_->setEnabled(true);
 }
 
 void ScatterWindow::setSamples(const QVector<QwtPoint3D> &samples)
 {
   plot_->setSamples(QwtPoint3DSeriesData(samples));
+  plot_->replot();
   rescaler_->rescale();
 }
 

@@ -8,7 +8,7 @@
 
 #include <fstream>
 #include <iostream>
-
+ 
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
     QMainWindow(parent, flags),
     tabWidget_(new QTabWidget(this)),

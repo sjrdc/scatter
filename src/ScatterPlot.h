@@ -19,7 +19,7 @@ public:
   void toggleColorMap();
   void increaseDotSize(int d);
 
-private:
+protected:
   void adaptAxesToSamples();
 
   void initColorMaps();
