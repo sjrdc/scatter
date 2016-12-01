@@ -11,35 +11,35 @@
 #include <cmath>
 
 ScatterPlot::ScatterPlot(QWidget *parent) :
-  QwtPlot(parent),
-  curve(NULL)
+    QwtPlot(parent),
+    curve(NULL)
 {
-  // attach curve
-  curve = new QwtPlotSpectroCurve();
-  curve->setPenWidth(3);
-  curve->attach(this);
+    // attach curve
+    curve = new QwtPlotSpectroCurve();
+    curve->setPenWidth(3);
+    curve->attach(this);
 
-  initColorMaps();
-  setSymbol(NULL);
-  setStyleSheet("background: button; "
-		"color: black;");
-  
-  // panning with the left mouse button
-  (void) new QwtPlotPanner(canvas());
+    initColorMaps();
+    setSymbol(NULL);
+    setStyleSheet("background: button; "
+                  "color: black;");
 
-  // zoom in/out with the wheel
-  QwtPlotMagnifier *magnifier = new QwtPlotMagnifier(canvas());
-  magnifier->setMouseButton(Qt::NoButton);
+    // panning with the left mouse button
+    (void) new QwtPlotPanner(canvas());
 
-  // grid
-  QwtPlotGrid *grid = new QwtPlotGrid;
-  grid->enableXMin(true);
-  grid->enableYMin(true);
+    // zoom in/out with the wheel
+    QwtPlotMagnifier *magnifier = new QwtPlotMagnifier(canvas());
+    magnifier->setMouseButton(Qt::NoButton);
 
-  grid->setMajorPen(QPen(Qt::gray, 0, Qt::DotLine));
-  grid->setMinorPen(QPen(Qt::gray, 0, Qt::DotLine));
+    // grid
+    QwtPlotGrid *grid = new QwtPlotGrid;
+    grid->enableXMin(true);
+    grid->enableYMin(true);
 
-  grid->attach(this);
+    grid->setMajorPen(QPen(Qt::gray, 0, Qt::DotLine));
+    grid->setMinorPen(QPen(Qt::gray, 0, Qt::DotLine));
+
+    grid->attach(this);
 }
 
 void ScatterPlot::initColorMaps()
@@ -54,21 +54,21 @@ void ScatterPlot::setSymbol(QwtSymbol *symbol)
 
 void ScatterPlot::adaptAxesToSamples()
 {
-  QRectF rect = curve->boundingRect();
-  qreal x = rect.right();
-  qreal y = rect.top();
-  qreal d = 1.1* std::max(std::fabs(x), std::fabs(y));
+    QRectF rect = curve->boundingRect();
+    qreal x = rect.right();
+    qreal y = rect.top();
+    qreal d = 1.1* std::max(std::fabs(x), std::fabs(y));
     
-  this->setAxisScale(QwtPlot::xBottom, -d, d, 16);
-  this->setAxisScale(QwtPlot::yLeft, -d, d, 16);
+    this->setAxisScale(QwtPlot::xBottom, -d, d, 16);
+    this->setAxisScale(QwtPlot::yLeft, -d, d, 16);
 }
 
 void ScatterPlot::setSamples(const QwtPoint3DSeriesData &samples)
 {
-  curve->setSamples(samples.samples());
-  curve->setColorRange(QwtInterval(0, samples.size()));
+    curve->setSamples(samples.samples());
+    curve->setColorRange(QwtInterval(0, samples.size()));
 
-  adaptAxesToSamples();
+    adaptAxesToSamples();
 }
 
 void ScatterPlot::toggleColorMap()
@@ -76,12 +76,12 @@ void ScatterPlot::toggleColorMap()
     if (activeColorMap)
     {
         colorMap = new QwtLinearColorMap(Qt::black, Qt::black);
-	setStyleSheet("background: button; color: black;");
+        setStyleSheet("background: button; color: black;");
     }
     else {
 
         colorMap = new QwtHueColorMap();
-	setStyleSheet("background: black; color: grey;");
+        setStyleSheet("background: black; color: grey;");
     }
     curve->setColorMap(colorMap);
 

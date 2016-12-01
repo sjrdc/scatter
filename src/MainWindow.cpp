@@ -8,7 +8,7 @@
 
 #include <fstream>
 #include <iostream>
- 
+
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
     QMainWindow(parent, flags),
     tabWidget_(new QTabWidget(this)),
@@ -23,26 +23,30 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 
 void MainWindow::openFile(const QString &filename)
 {
-  infile_ = filename;
-  readPoints();
+    infile_ = filename;
+    readPoints();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-  switch (event->key())
+    switch (event->key())
     {
     case Qt::Key_F5:
     case Qt::Key_R:
-      readPoints();
-      break;
+        readPoints();
+        break;
     case Qt::Key_C:
     case Qt::Key_Plus:
     case Qt::Key_Minus:
-      scatterWindow_->keyPressEvent(event);
-      break;
+        scatterWindow_->keyPressEvent(event);
+        break;
+    case Qt::Key_S:
+        psfwindow_->keyPressEvent(event);
+        break;
+
     default:
-      event->ignore();
-      break;
+        event->ignore();
+        break;
     }
 }
 

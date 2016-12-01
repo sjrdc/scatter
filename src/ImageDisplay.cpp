@@ -1,11 +1,10 @@
 #include <iostream>
-#include <qwt_color_map.h>
 
 #include "ImageDisplay.h"
 
 ImageDisplay::ImageDisplay()
 {
-  colourmap = new QwtLinearColorMap(Qt::black, Qt::white);
+  colourmap = new SwitchableLogColorMap(Qt::black, Qt::white);
   datamatrix = new ImageRasterData;
   plotimg = new QwtPlotSpectrogram();
   plotimg->setRenderThreadCount(0); // use system specific thread count
@@ -52,4 +51,10 @@ void ImageDisplay::updateDisplay(QVector<double> v, int xdim, int ydim,
   this->replot();
 }
 
+void ImageDisplay::toggleColormap()
+{
+    colourmap->toggle();
+    this->replot();
+    qDebug() << "piet";
+}
 

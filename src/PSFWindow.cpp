@@ -1,10 +1,13 @@
 #include "PSFWindow.h"
 #include "ImageDisplay.h"
+#include "LogColormap.h"
 
 #include <qwt_plot_spectrocurve.h>
 
 #include <complex>
 #include <fftw3.h>
+
+#define rowmajorindex(i, j,dimx, dimy) (j + dimy*i)
 
 PSFWindow::PSFWindow(QWidget *parent, Qt::WindowFlags flags) :
     QMainWindow(parent, flags),
@@ -15,9 +18,16 @@ PSFWindow::PSFWindow(QWidget *parent, Qt::WindowFlags flags) :
 
 void PSFWindow::keyPressEvent(QKeyEvent* event)
 {
+    switch (event->key())
+    {
+    case Qt::Key_S:
+        imagedisplay_->toggleColormap();
+        break;
+    default:
+        event->ignore();
+        break;
+    }
 }
-
-#define rowmajorindex(i, j,dimx, dimy) (j + dimy*i)
 
 void fft2shift(std::complex<float>* img, size_t size)
 {
@@ -84,5 +94,3 @@ int PSFWindow::estimateSize(const QVector<QwtPoint3D> &samples) const
     // forced to even size, which is also necessary for fftshift routine
     return 2*std::max(x, y);
 }
-
-
