@@ -55,6 +55,5 @@ void ImageDisplay::toggleColormap()
 {
     colourmap->toggle();
     this->replot();
-    qDebug() << "piet";
 }
 

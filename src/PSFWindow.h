@@ -14,7 +14,7 @@ public:
     void keyPressEvent(QKeyEvent *event);
   
 protected:
-  int estimateSize(const QVector<QwtPoint3D> &samples) const;
+  QSize estimateSize(const QVector<QwtPoint3D> &samples) const;
 
   ImageDisplay *imagedisplay_;
 };

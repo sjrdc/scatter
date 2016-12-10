@@ -12,8 +12,14 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5Widgets)
 find_package(Qwt REQUIRED)
 include_directories(${QWT_INCLUDE_DIRS})
-include_directories(C:/Users/310257923/Downloads/fftw3)
-set(fftwf C:/Users/310257923/Downloads/fftw3/libfftw3f-3.a)
+
+if (WIN32)
+  include_directories(C:/Users/310257923/Downloads/fftw3)
+  set(fftwf C:/Users/310257923/Downloads/fftw3/libfftw3f-3.a)
+else ()
+  set(fftwf fftw3f)
+endif()
+  
 add_executable(scatterplot
   main.cpp
   MainWindow.cpp

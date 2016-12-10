@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QDebug>
 #include <qwt_color_map.h>
+#include <cmath>
 
 class SwitchableLogColorMap : public QwtLinearColorMap
 {
@@ -28,7 +28,6 @@ public:
     void toggle()
     {
         useLogScale_ = !useLogScale_;
-        qDebug() << useLogScale_;
     }
 
 private:
