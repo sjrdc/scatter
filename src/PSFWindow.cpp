@@ -11,7 +11,6 @@ size_t rowmajorindex(size_t r, size_t c, size_t rows, size_t cols)
 {
     return (c + r*cols);
 }
-// org: #define rowmajorindex(i, j, dimx, dimy) (j + dimy*i)
 
 PSFWindow::PSFWindow(QWidget *parent, Qt::WindowFlags flags) :
     QMainWindow(parent, flags),
@@ -94,7 +93,7 @@ void PSFWindow::display(std::complex<float>* f, size_t rows, size_t cols)
     for (int r = rOffset; r < rOffset + rows; ++r)
         for (int c = cOffset; c < cOffset + cols; ++c)
         {
-            size_t iout = rowmajorindex(size - 1 - r, c, size, size);
+            size_t iout = rowmajorindex(r, c, size, size);
             out[iout] = std::abs(f[rowmajorindex(r - rOffset, c - cOffset, rows, cols)]);
 
             if (out[iout] < minIntensity) minIntensity = out[iout];
