@@ -53,7 +53,7 @@ void PSFWindow::setSamples(const QVector<QwtPoint3D> &samples)
     QSize qsize = estimateSize(samples);
     int rows = qsize.height();
     int cols = qsize.width();
-    
+
     std::complex<float>* F = new std::complex<float>[rows*cols];
     memset(F, 0., rows*cols*sizeof(std::complex<float>));
     for (int i = 0; i < samples.size(); ++i)
@@ -76,7 +76,6 @@ void PSFWindow::setSamples(const QVector<QwtPoint3D> &samples)
 
     delete [] f;
     delete [] F;
-
 }
 
 void PSFWindow::display(std::complex<float>* f, size_t rows, size_t cols)
@@ -108,8 +107,8 @@ QSize PSFWindow::estimateSize(const QVector<QwtPoint3D> &samples) const
     QwtPoint3DSeriesData sd(samples);
     QRectF r = sd.boundingRect();
 
-    int cols = 2*std::max(std::fabs(r.right()), std::fabs(r.left()));
-    int rows = 2*std::max(std::fabs(r.top()), std::fabs(r.bottom()));
+    int cols = 2*std::max(std::fabs(r.right()), std::fabs(r.left())) + 2;
+    int rows = 2*std::max(std::fabs(r.top()), std::fabs(r.bottom())) + 2;
 
     // forced to even size, which is also necessary for fftshift routine
     return QSize(cols, rows);
