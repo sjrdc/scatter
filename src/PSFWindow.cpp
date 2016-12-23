@@ -99,7 +99,7 @@ void PSFWindow::display(std::complex<float>* f, size_t rows, size_t cols)
             else if (out[iout] > maxIntensity) maxIntensity = out[iout];
         }
 
-    imagedisplay_->updateDisplay(out, size, size, minIntensity, maxIntensity);
+    imagedisplay_->updateDisplay(out, size, size, 0.001*maxIntensity, maxIntensity);
 }
 
 QSize PSFWindow::estimateSize(const QVector<QwtPoint3D> &samples) const
