@@ -66,7 +66,7 @@ void ScatterPlot::adaptAxesToSamples()
 void ScatterPlot::setSamples(const QwtPoint3DSeriesData &samples)
 {
     curve->setSamples(samples.samples());
-    curve->setColorRange(QwtInterval(0, samples.size()));
+    curve->setColorRange(QwtInterval(0, 360./320.*samples.size()));
 
     adaptAxesToSamples();
 }
